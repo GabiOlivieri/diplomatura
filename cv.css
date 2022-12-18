@@ -1,0 +1,31 @@
+h1 {
+    color: #385170;
+    text-align: center;
+ }
+
+ .fondo{
+    background-color: #151515;
+ }
+ 
+ h2 {
+    color: #385170;
+    text-align: center;
+ }
+
+ h3 {
+    color: #385170;
+    text-align: center;
+ }
+
+ div {
+    color: #385170;
+    text-align: center;
+ }
+
+ ul{
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-top: -0.5%;
+    margin-left: -1.5%;
+ }
