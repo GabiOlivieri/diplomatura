@@ -1,0 +1,26 @@
+.fondo-box{
+   border: 1px solid #000;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+
+.item {
+   width: 200px;
+   color:#fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 200px;
+}
+
+.item-1{
+   background-color: red;
+}
+.item-2{
+   background-color: blue;
+}
+.item-3{
+   background-color: green;
+}
