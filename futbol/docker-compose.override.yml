@@ -1,0 +1,18 @@
+version: '3'
+
+
+services:
+  reactjs:
+    container_name: reactjs-diplomatura
+    environment:
+      PORT: 80
+    working_dir: /usr/src/www/react-base
+    entrypoint: "npm start"
+    labels:
+      - "traefik.backend=react"
+      - "traefik.frontend.rule=Host:react-dev.frba.utn.edu.ar"
+      - "traefik.docker.network=traefik_webgateway"
+      - "traefik.frontend.redirect.entryPoint=https"
+    volumes:
+      - ./frontend/src:/usr/src/www/react-base/src
+      - ./frontend/public:/usr/src/www/react-base/public
