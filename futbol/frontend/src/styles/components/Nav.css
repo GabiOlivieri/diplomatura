@@ -1,0 +1,12 @@
+#ul_top_hypers li {
+    display: inline;
+    margin-left: 2.5%;
+}
+
+#opciones {
+    text-align: center;
+}
+
+nav{
+    margin-left: -2.5%;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
+import '../styles/pages/Contacto.css'
 
 const ContactoPage = (props) => {
     return (
         <div class="fcf-body">
 
     <div id="fcf-form">
-    <h3 class="fcf-h3">Contact us</h3>
+    <h3 class="fcf-h3">Formulario de contacto</h3>
 
     <form id="fcf-form-id" class="fcf-form-class" method="post" >
         
