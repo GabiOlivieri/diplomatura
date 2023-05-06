@@ -1,0 +1,57 @@
+version: '3'
+
+networks:
+  db:
+
+
+services:
+  reactjs:
+    container_name: reactjs-diplomatura
+    environment:
+      PORT: 80
+    working_dir: /usr/src/www/react-base
+    entrypoint: "npm start"
+    labels:
+      - "traefik.backend=react"
+      - "traefik.frontend.rule=Host:react-dev.frba.utn.edu.ar"
+      - "traefik.docker.network=traefik_webgateway"
+      - "traefik.frontend.redirect.entryPoint=https"
+    volumes:
+      - ./frontend/src:/usr/src/www/react-base/src
+      - ./frontend/public:/usr/src/www/react-base/public
+
+
+  nodejs:
+    container_name: nodejs-diplomatura
+    environment:
+      PORT: 80
+      NODE_ENV: "development"
+    working_dir: /usr/src/www/node-base
+    ports:
+      - "3000:3000"
+    entrypoint: "npm start"
+    networks:
+      - db
+    labels:
+      - "traefik.backend=node"
+      - "traefik.frontend.rule=Host:node-dev.frba.utn.edu.ar"
+      - "traefik.docker.network=traefik_webgateway"
+      - "traefik.frontend.redirect.entryPoint=https"
+    volumes:
+      - ./backend/src:/usr/src/www/node-base/src
+      - ./backend/views:/usr/src/www/node-base/views
+
+  diplomatura-db:
+    container_name: db-diplomatura
+    image: mariadb
+    expose: [ 3306 ]
+    ports: [ "3311:3306" ]
+    environment:
+      MYSQL_DATABASE: diplomatura
+      MYSQL_USER: diplomatura
+      MYSQL_PASSWORD: dsidev123
+      MYSQL_ROOT_PASSWORD: asd123
+    volumes:
+      - ./db/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    networks:
+      - db
