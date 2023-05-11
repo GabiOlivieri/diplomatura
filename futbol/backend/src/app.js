@@ -1,11 +1,10 @@
 const express = require('express');
-var nosotrosRouter = require('./routes/nosotros');
 var publicaciones_router = require('./routes/admin/publicaciones');
+var loginRouter = require('./routes/admin/login')
 const session = require('express-session');
 const hbs = require('hbs');
 
-
-bodyParser = require('body-parser').json();
+bodyParser = require('body-parser');
 
 let port = process.env.PORT;
 if(process.env.NODE_ENV === "test") port = 3000
@@ -22,6 +21,11 @@ app.route('/messi').get(function (req,res){
     res.send("Posteaste un messi");
 });
 
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+app.use(bodyParser.json())
+
 app.use(session({
     secret: 'ciclon2023',
     resave: false,
@@ -29,9 +33,17 @@ app.use(session({
 }));
 
 // Middleware
-const myMiddleware = (req, res, next) => {
-    console.log('Se ha llamado al middleware');
-    next();
+const secured = async (req, res, next) => {
+    try{
+        console.log(req.session.id_usuario);
+        if(req.session.id_usuario){
+            next();
+        } else {
+            res.redirect('/admin/login');
+        }
+    }catch (error){
+        console.log(error);
+    }
 };
 
 app.post('/ingresar', bodyParser, function (req,res){
@@ -40,8 +52,7 @@ app.post('/ingresar', bodyParser, function (req,res){
     }
     res.redirect('/');
 });
-
-app.use('/', myMiddleware);
+app.use('/admin/login', loginRouter);
 
 app.get('/salir', function (req,res){
     req.session.destroy();
@@ -49,5 +60,4 @@ app.get('/salir', function (req,res){
 })
 
 
-app.use('/nosotros', nosotrosRouter);
-app.use('/publicaciones', publicaciones_router);
+app.use('/publicaciones',secured, publicaciones_router);

@@ -12,28 +12,32 @@ import Header from './components/layout/Header';
 import Nav from './components/layout/Nav';
 import ContactoPage from './pages/ContactoPage';
 import HomePage from './pages/HomePage';
-import NovedadesPage from './pages/NovedadesPage';
+import PublicacionesPage from './pages/PublicacionesPage';
 import NosotrosPage from './pages/NosotrosPage';
 import ThemeProvider from "./styles/ThemeProvider";
+import {ProvideAuth} from "./context/ProvideAuth";
+import LoginPage from "./pages/LoginPage";
 
 export const App = (props)  => {
     return (
         <div className="App">
             <ThemeProvider>
-
-                {/*<Header/>*/}
-                <BrowserRouter>
-                <Nav/>
-                <Routes>
-                <Route path="/" element={<HomePage/>} />
-                <Route path="nosotros" element={<NosotrosPage/>} />
-                <Route path="novedades" element={<NovedadesPage/>} />
-                <Route path="contacto" element={<ContactoPage/>} />
-                </Routes>
-                </BrowserRouter>
-                <Footer>
-                    <Pie/>
-                </Footer>
+                <ProvideAuth>
+                    <Header/>
+                    <BrowserRouter>
+                    <Nav/>
+                    <Routes>
+                        <Route path="/" element={<HomePage/>} />
+                        <Route path="nosotros" element={<NosotrosPage/>} />
+                        <Route path="publicaciones" element={<PublicacionesPage/>} />
+                        <Route path="contacto" element={<ContactoPage/>} />
+                        <Route path="login" element={<LoginPage/>} />
+                    </Routes>
+                    </BrowserRouter>
+                    <Footer>
+                        <Pie/>
+                    </Footer>
+                </ProvideAuth>
             </ThemeProvider>
         </div>
     );

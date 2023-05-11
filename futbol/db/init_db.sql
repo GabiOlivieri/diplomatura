@@ -23,15 +23,14 @@ DROP TABLE IF EXISTS `publicaciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `publicaciones` (
-                                 `id` int(11) NOT NULL,
-                                 `titulo` char(255) DEFAULT NULL,
-                                 `descripcion` char(255) DEFAULT NULL,
-                                 `likes` int(11) DEFAULT NULL,
-                                 `dislikes` int(11) DEFAULT NULL,
-                                 `fecha_subida` date DEFAULT NULL,
+                                 `id` int(11) NOT NULL AUTO_INCREMENT,
+                                 `titulo` char(255) NOT NULL,
+                                 `descripcion` char(255) NOT NULL,
+                                 `iframe` char(255) NOT NULL,
+                                 `fecha_subida` date NOT NULL,
                                  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-INSERT INTO publicaciones VALUES (1,'Gol de Bareiro anulado', 'Gol anulado a Bareiro en el partido contra Velez en la fecha 16 del torneo', 0, 0, DATE("2023-04-29"));
+INSERT INTO publicaciones VALUES (1,'Gol de Bareiro anulado', 'Gol anulado a Bareiro en el partido contra Velez en la fecha 16 del torneo', 'https://www.youtube.com/embed/vhTcY9qibIs', DATE("2023-04-29"));
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +43,19 @@ LOCK TABLES `publicaciones` WRITE;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+CREATE TABLE `users` (
+                                 `id` int(11) NOT NULL AUTO_INCREMENT,
+                                 `user` VARCHAR(255) NOT NULL,
+                                 `email` VARCHAR(255) NOT NULL,
+                                 `password` VARCHAR(255) NOT NULL DEFAULT MD5('default'),
+                                 PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `publicaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `publicaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

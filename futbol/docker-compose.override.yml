@@ -40,6 +40,7 @@ services:
     volumes:
       - ./backend/src:/usr/src/www/node-base/src
       - ./backend/views:/usr/src/www/node-base/views
+      - ./backend/bootstrap-5.2.3-dist:/usr/src/www/node-base/bootstrap-5.2.3-dist
 
   diplomatura-db:
     container_name: db-diplomatura

@@ -1,0 +1,38 @@
+<div class="container" style="margin:100px auto">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h4>Modificar publicación</h4>
+            {{#if error}}
+                <h5>{{message}}</h5>
+            {{/if}}
+                <div class="mb-3 row">
+                    <input id="titulo" type="text" class="form-control" placeholder="Titulo" name="titulo" value="{{publicacion.titulo}}">
+                </div>
+                <div class="mb-3 row">
+                    <input id="descripcion" type="text" class="form-control" placeholder="Descripción" name="descripcion" value="{{publicacion.descripcion}}">
+                </div>
+
+                <div class="mb-3 row">
+                    <input id="iframe" type="text" class="form-control" placeholder="Link de youtube" name="iframe" value="{{publicacion.iframe}}">
+                </div>
+                <button type="button" onclick="modificarPublicacion({{publicacion.id}})" class="btn btn-primary">Guardar</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    async function modificarPublicacion(id) {
+        await fetch('/publicaciones/modificar/' + id ,  {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                titulo: document.getElementById('titulo').value,
+                descripcion: document.getElementById('descripcion').value,
+                iframe: document.getElementById('iframe').value
+            })
+        })
+        window.location.href = "https://node-dev.frba.utn.edu.ar/publicaciones";
+    }
+</script>
