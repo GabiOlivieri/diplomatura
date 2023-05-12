@@ -16,8 +16,8 @@
         {{#each publicaciones}}
         <tr>
             <th scope="row"> {{id}}</th>
-            <td><a class="btn btn-succes">
-                <i class="fa fa-minus" onclick="eliminarPublicacion({{id}})"></i> Eliminar</a>
+            <td><a onclick="deleteSomething({{id}})" class="btn btn-succes">
+                <i class="fa fa-minus" onclick="deleteSomething({{id}})"></i> Eliminar</a>
                 <a href="publicaciones/modificar/{{id}}" class="btn btn-succes">
                     <i class="fa fa-edit"></i>Modificar</a>
             <br></td>
@@ -37,9 +37,10 @@
 </div>
 
 <script>
-    function eliminarPublicacion(id) {
+    function deleteSomething(id) {
         fetch('/publicaciones/eliminar/' + id ,  {
             method: 'DELETE'
         })
+        window.location.href = "https://node-dev.frba.utn.edu.ar/publicaciones";
     }
 </script>

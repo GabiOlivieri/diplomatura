@@ -15,14 +15,11 @@ import HomePage from './pages/HomePage';
 import PublicacionesPage from './pages/PublicacionesPage';
 import NosotrosPage from './pages/NosotrosPage';
 import ThemeProvider from "./styles/ThemeProvider";
-import {ProvideAuth} from "./context/ProvideAuth";
-import LoginPage from "./pages/LoginPage";
 
 export const App = (props)  => {
     return (
         <div className="App">
             <ThemeProvider>
-                <ProvideAuth>
                     <Header/>
                     <BrowserRouter>
                     <Nav/>
@@ -31,13 +28,11 @@ export const App = (props)  => {
                         <Route path="nosotros" element={<NosotrosPage/>} />
                         <Route path="publicaciones" element={<PublicacionesPage/>} />
                         <Route path="contacto" element={<ContactoPage/>} />
-                        <Route path="login" element={<LoginPage/>} />
                     </Routes>
                     </BrowserRouter>
                     <Footer>
                         <Pie/>
                     </Footer>
-                </ProvideAuth>
             </ThemeProvider>
         </div>
     );

@@ -4,9 +4,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Col, Row } from 'antd';
 import {Link} from "react-router-dom";
-import { LoginOutlined, UserOutlined } from '@ant-design/icons';
-import { Button  } from 'antd';
-import {useAuth} from "../../context/AuthContext";
 
 const items = [
     {
@@ -41,7 +38,6 @@ const navStyle = {
 const Nav = () => {
     const [current, setCurrent] = useState('/');
     const [options, setOptions] = useState(items);
-    const {isLogedIn} = useAuth();
     const onClick = (e) => {
         setCurrent(e.key);
     };
@@ -52,7 +48,7 @@ const Nav = () => {
         } = window.location
 
         setCurrent(pathname)
-    },[isLogedIn])
+    },[])
 
 
 

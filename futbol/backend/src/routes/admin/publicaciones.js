@@ -93,7 +93,7 @@ publicaciones_router.post('/agregar', async (req,res,next) => {
 publicaciones_router.delete('/eliminar/:id', async (req,res,next) => {
     try{
             await publicacionesModel.eliminarPublicacion(req.params.id);
-            // res.redirect('/publicaciones')
+            res.redirect('/publicaciones')
     }catch (error){
         console.log(error)
     }
