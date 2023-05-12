@@ -29,8 +29,7 @@ CREATE TABLE `publicaciones` (
                                  `iframe` char(255) NOT NULL,
                                  `fecha_subida` date NOT NULL,
                                  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-INSERT INTO publicaciones VALUES (1,'Gol de Bareiro anulado', 'Gol anulado a Bareiro en el partido contra Velez en la fecha 16 del torneo', 'https://www.youtube.com/embed/vhTcY9qibIs', DATE("2023-04-29"));
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,23 +38,41 @@ INSERT INTO publicaciones VALUES (1,'Gol de Bareiro anulado', 'Gol anulado a Bar
 
 LOCK TABLES `publicaciones` WRITE;
 /*!40000 ALTER TABLE `publicaciones` DISABLE KEYS */;
+INSERT INTO `publicaciones` VALUES
+                                (1,'Gol de Bareiro anulado','Gol anulado a Bareiro en el partido contra Velez en la fecha 16 del torneo','https://www.youtube.com/embed/vhTcY9qibIs','2023-04-29'),
+                                (3,'Gol de Messi a Mechico','Golazo de Messi contra Mexico en la copa del mundo Qatar 2022','https://www.youtube.com/embed/ZITdv6jdwI4','2023-05-11'),
+                                (10,'Himno Argentina vs Francia - Qatar 2022','Himno Argentino en la final del mundial de la FIFA Qatar 2022 contra Francia','https://www.youtube.com/embed/d-3Z3y0mI6s','2023-05-11');
 /*!40000 ALTER TABLE `publicaciones` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-                                 `id` int(11) NOT NULL AUTO_INCREMENT,
-                                 `user` VARCHAR(255) NOT NULL,
-                                 `email` VARCHAR(255) NOT NULL,
-                                 `password` VARCHAR(255) NOT NULL DEFAULT MD5('default'),
-                                 PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                         `id` int(11) NOT NULL AUTO_INCREMENT,
+                         `user` varchar(255) NOT NULL,
+                         `email` varchar(255) NOT NULL,
+                         `password` varchar(255) NOT NULL DEFAULT md5('default'),
+                         PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
 
 LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `publicaciones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `publicaciones` ENABLE KEYS */;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES
+    (1,'golivieri','gabrielolivieri01@gmail.com','c21f969b5f03d33d43e04f8f136e7682');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -64,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-29 22:36:09
+-- Dump completed on 2023-05-12 13:22:03
