@@ -1,55 +1,113 @@
-import React from 'react';
-import '../styles/pages/Contacto.css'
+import {React, useState} from 'react';
+import '../styles/pages/Contacto.css';
+import { Col, Row } from 'antd';
+import axios from 'axios';
+import { Button, notification } from 'antd';
 
 const ContactoPage = (props) => {
+    const initialForm = {
+        nombre: '',
+        email: '',
+        telefono: '',
+        mensaje: ''
+    }
+
+    const [sending, setSending] = useState(false);
+    const [msg, setMsg] = useState('');
+    const [formData, setFormData] = useState(initialForm);
+
+    const handleChange = e => {
+        const {name,value} = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        setMsg('');
+        setSending(true);
+        const response = await axios.post('https://node-dev.frba.utn.edu.ar/contacto',formData);
+        setSending(false);
+        setMsg(response.data.message);
+        openNotification()
+        if(response.data.error === false){
+            setFormData(initialForm);
+        }
+    }
+
+    const openNotification = () => {
+        notification.open({
+            message: 'Email enviado',
+            description:
+                'El email de contacto a sido enviado con exito',
+        });
+    };
+
+
     return (
-        <div class="fcf-body">
+        <Row align='center' justify='center'>
+            <Col span={18}>
+            <div className="fcf-body">
 
-    <div id="fcf-form">
-    <h3 class="fcf-h3">Formulario de contacto</h3>
+                <div id="fcf-form">
+                    <h3 className="fcf-h3">Formulario de contacto</h3>
 
-    <form id="fcf-form-id" class="fcf-form-class" method="post" >
-        
-        <div class="fcf-form-group">
-            <label for="Name" class="fcf-label">Nombre y apellido</label>
-            <div class="fcf-input-group">
-                <input type="text" id="Name" name="Name" class="fcf-form-control" required/>
+                    {msg ? <h5>{msg}</h5> : null}
+
+                    <form id="fcf-form-id" className="fcf-form-class" method="POST" onSubmit={handleSubmit}>
+
+                        <div className="fcf-form-group">
+                            <label htmlFor="Name" className="fcf-label">Nombre y apellido</label>
+                            <div className="fcf-input-group">
+                                <input type="text" id="Name" name="nombre" className="fcf-form-control" value={formData.nombre} onChange={handleChange}/>
+                            </div>
+                        </div>
+
+                        <div className="fcf-form-group">
+                            <label htmlFor="Email" className="fcf-label">Tu dirección de mail</label>
+                            <div className="fcf-input-group">
+                                <input type="text" id="Email" name="email" className="fcf-form-control" value={formData.email} onChange={handleChange}/>
+                            </div>
+                        </div>
+
+                        <div className="fcf-form-group">
+                            <label htmlFor="Telefono" className="fcf-label">Tu teléfono</label>
+                            <div className="fcf-input-group">
+                                <input type="text" id="telefono" name="telefono" className="fcf-form-control" value={formData.telefono} onChange={handleChange}/>
+                            </div>
+                        </div>
+
+                        <div className="fcf-form-group">
+                            <label htmlFor="Message" className="fcf-label">Mensaje</label>
+                            <div className="fcf-input-group">
+                                <textarea id="Message" name="mensaje" className="fcf-form-control" rows="6"
+                                          maxLength="3000" value={formData.mensaje} onChange={handleChange}></textarea>
+                            </div>
+                        </div>
+
+                        <div className="fcf-form-group">
+                            <button type="submit" id="fcf-button"
+                                    className="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Enviar mensaje
+                            </button>
+                        </div>
+
+                    </form>
+                    <div className="datos">
+                        <h2>Otras vias de comunicación</h2>
+                        <p>También puede contactarse con nosotros usando los siguientes medios</p>
+                        <ul>
+                            <li>Teléfono: 11 5524-6481</li>
+                            <li>Email: gabrielolivieri01@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
-        </div>
+            </Col>
+        </Row>
 
-        <div class="fcf-form-group">
-            <label for="Email" class="fcf-label">Tu dirección de mail</label>
-            <div class="fcf-input-group">
-                <input type="email" id="Email" name="Email" class="fcf-form-control" required/>
-            </div>
-        </div>
-
-        <div class="fcf-form-group">
-            <label for="Message" class="fcf-label">Mensaje</label>
-            <div class="fcf-input-group">
-                <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>
-            </div>
-        </div>
-
-        <div class="fcf-form-group">
-            <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Enviar mensaje</button>
-        </div>
-
-    </form>
-        <div class="datos">
-            <h2>Otras vias de comunicación</h2>
-            <p>También puede contactarse con nosotros usando los siguientes medios</p>
-            <ul>
-                <li>Teléfono: 11 5524-6481</li>
-                <li>Email: contacto@fbol.com.ar</li>
-                <li>Facebook:</li>
-                <li>Twitter:</li>
-                <li>Skype:</li>
-            </ul>
-        </div>
-    </div>
-
-</div>
     );
 }
 

@@ -44,23 +44,6 @@ const HomePage = (props) => {
                 <Col span={8}>
                     <div id='cards'>
                         <Card
-                            title="¿Como participar?"
-                            bordered={false}
-                            style={{
-                                height: 400,
-                            }}
-                        >
-                            <UserAddOutlined style={{
-                                fontSize: '50px', color: token.colorSecondary
-                            }
-                            }/>
-                            <p>Una vez subido un video representando el momento de la jugada, podrás opinar en los comentarios, guardar dicho video e interactuar con los demas usuarios para buscar curiosidades!</p>
-                        </Card>
-                    </div>
-                </Col>
-                <Col span={8}>
-                    <div id='cards'>
-                        <Card
                             title="¿Como funciona?"
                             bordered={false}
                             style={{

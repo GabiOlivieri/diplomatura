@@ -16,15 +16,15 @@
         {{#each publicaciones}}
         <tr>
             <th scope="row"> {{id}}</th>
-            <td><a href="publicaciones/agregar" class="btn btn-succes">
-                <i class="fa fa-minus" onclick="deleteSomething({{id}})"></i> Eliminar</a>
+            <td><a class="btn btn-succes">
+                <i class="fa fa-minus" onclick="eliminarPublicacion({{id}})"></i> Eliminar</a>
                 <a href="publicaciones/modificar/{{id}}" class="btn btn-succes">
                     <i class="fa fa-edit"></i>Modificar</a>
             <br></td>
             <td>{{titulo}}<br></td>
             <td>{{fecha_subida}}<br></td>
             <td class="text-center">
-                {{descripcion}}
+                {{descripcion}}<br>
             </td>
             <td class="text-center">
                 <iframe width="800" height="600" src="{{iframe}}" title="¿Fue falta? El gol anulado a #SanLonrezo en el partido ante #Vélez" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -37,7 +37,7 @@
 </div>
 
 <script>
-    function deleteSomething(id) {
+    function eliminarPublicacion(id) {
         fetch('/publicaciones/eliminar/' + id ,  {
             method: 'DELETE'
         })

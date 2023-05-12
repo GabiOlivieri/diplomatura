@@ -46,37 +46,10 @@ const Nav = () => {
         setCurrent(e.key);
     };
 
-    const login = ({
-            label: 'Sesión',
-            key: 'SubMenu',
-            icon: <UserOutlined />,
-            children: [
-                {
-                    label: (<Link to="/login">Iniciar Sesión</Link>),
-                    key: 'login'
-                }
-            ],
-        })
-
-    const logout = ({
-        label: 'Sesión',
-        key: 'SubMenu',
-        icon: <UserOutlined />,
-        children: [
-            {
-                label: (<Link to="/logout">Cerrar Sesion</Link>),
-                key: 'logout'
-            }
-        ],
-    })
-
     React.useEffect( () => {
         const {
            pathname
         } = window.location
-
-        if (!isLogedIn) setOptions(prevState => [...prevState,login])
-        else setOptions(prevState => [...prevState,logout])
 
         setCurrent(pathname)
     },[isLogedIn])

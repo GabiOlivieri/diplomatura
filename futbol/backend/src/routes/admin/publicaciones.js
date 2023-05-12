@@ -13,6 +13,11 @@ publicaciones_router.get('/', async function (req,res,next){
         })
 })
 
+publicaciones_router.get('/ultimas', async function (req,res,next){
+    var publicaciones = await publicacionesModel.getPublicaciones();
+    res.json(publicaciones)
+})
+
 publicaciones_router.get('/agregar', (req,res,next) => {
     res.render('admin/agregar',{
         layout: 'admin/layout'
@@ -21,7 +26,6 @@ publicaciones_router.get('/agregar', (req,res,next) => {
 
 publicaciones_router.put('/modificar/:id', async (req,res,next) => {
     try{
-        console.log(req.body)
         await publicacionesModel.modificarPublicacion(req.params.id,req.body);
         res.redirect('/publicaciones')
     }catch (error){
@@ -89,7 +93,7 @@ publicaciones_router.post('/agregar', async (req,res,next) => {
 publicaciones_router.delete('/eliminar/:id', async (req,res,next) => {
     try{
             await publicacionesModel.eliminarPublicacion(req.params.id);
-            res.redirect('/publicaciones')
+            // res.redirect('/publicaciones')
     }catch (error){
         console.log(error)
     }
