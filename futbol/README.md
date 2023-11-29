@@ -11,3 +11,4 @@ Entrega final del proyecto por la Diplomatura en programación web full stack co
 - El sitio es responsive
 - La ruta del front es react-dev.frba.utn.edu.ar y la del back es node-dev.frba.utn.edu.ar
 - Las credenciales de la db puestas en el .env representan las credenciales de la db levantada en el contenedor diplomatura-db
+- [Link del video de muestra](https://www.youtube.com/watch?v=KecZJYeJP6M&feature=youtu.be&ab_channel=GabrielOlivieri)

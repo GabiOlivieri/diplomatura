@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway
+  backend:
+
+services:
+  reactjs:
+    image: react-gabi
+    networks:
+      - web
+      - backend
+
+  nodejs:
+    image: node-gabi
+    networks:
+      - web
+      - backend
+

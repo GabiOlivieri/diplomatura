@@ -1,0 +1,46 @@
+<div class="container" style="margin-top:50px;">
+    <div class="row">
+        <p class="text-end">Hola {{usuario}} ! <a class="btn btn-danger" href="/admin/login/logout">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a></p>
+    </div>
+    <div class="col-2 text-right">
+        <a href="publicaciones/agregar" class="btn btn-succes">
+            <i class="fa fa-plus"></i>Nuevo</a>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <h3>Listado de publicaciones</h3>
+        </div>
+    </div>
+
+    <tbody>
+        {{#each publicaciones}}
+        <tr>
+            <th scope="row"> {{id}}</th>
+            <td><a onclick="deleteSomething({{id}})" class="btn btn-succes">
+                <i class="fa fa-minus" onclick="deleteSomething({{id}})"></i> Eliminar</a>
+                <a href="publicaciones/modificar/{{id}}" class="btn btn-succes">
+                    <i class="fa fa-edit"></i>Modificar</a>
+            <br></td>
+            <td>{{titulo}}<br></td>
+            <td>{{fecha_subida}}<br></td>
+            <td class="text-center">
+                {{descripcion}}<br>
+            </td>
+            <td class="text-center">
+                <iframe width="800" height="600" src="{{iframe}}" title="¿Fue falta? El gol anulado a #SanLonrezo en el partido ante #Vélez" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </td>
+        </tr>
+            <br><br>
+        {{/each}}
+    </tbody>
+
+</div>
+
+<script>
+    function deleteSomething(id) {
+        fetch('/publicaciones/eliminar/' + id ,  {
+            method: 'DELETE'
+        })
+        window.location.href = "https://node-dev.frba.utn.edu.ar/publicaciones";
+    }
+</script>
